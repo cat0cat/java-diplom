@@ -18,9 +18,9 @@ public class ImageConverter implements TextGraphicsConverter  {
     public ImageConverter (){
         ColorSchema schema = new ColorSchema();
         setTextColorSchema(schema);
-        setMaxWidth(maxWidth);
-        setMaxHeight(maxHeight);
-        setMaxRatio(maxRatio);
+        setMaxWidth(0);
+        setMaxHeight(0);
+        setMaxRatio(0.0);
     }
 
     @Override
@@ -46,11 +46,11 @@ public class ImageConverter implements TextGraphicsConverter  {
             ratio = (widthRatio > heightRatio) ?  widthRatio : heightRatio;
             newWidth = (int) (imgWidth / ratio);
             newHeight = (int) (imgHeight / ratio);
-        } else if (this.maxWidth > 0 && this.maxHeight == 0) { // если задана максимальная ширина
+        } else if ((this.maxWidth > 0) && (imgWidth > this.maxWidth)) { // если задана максимальная ширина
             double ratio = imgWidth * 1.0 / maxWidth;
             newWidth = (int) (imgWidth / ratio);
             newHeight = (int) (imgHeight / ratio);
-        } else if (this.maxWidth == 0 && this.maxHeight > 0) { // если задана максимальная высота
+        } else if ((this.maxHeight > 0) && (imgHeight > this.maxHeight)) { // если задана максимальная высота
             double ratio = imgHeight * 1.0 / maxWidth;
             newWidth = (int) (imgWidth / ratio);
             newHeight = (int) (imgHeight / ratio);
