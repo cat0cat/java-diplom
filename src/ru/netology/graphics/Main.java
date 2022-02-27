@@ -12,6 +12,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         //TextGraphicsConverter converter = null; // Создайте тут объект вашего класса конвертера
         TextGraphicsConverter converter = new ImageConverter();
+
         GServer server = new GServer(converter); // Создаём объект сервера
         server.start(); // Запускаем
 
