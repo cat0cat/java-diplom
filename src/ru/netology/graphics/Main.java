@@ -15,6 +15,7 @@ public class Main {
 
         GServer server = new GServer(converter); // Создаём объект сервера
         server.start(); // Запускаем
+        converter.setMaxWidth(250);
 
         // Или то же, но с выводом на экран:
 //        String url = "https://raw.githubusercontent.com/netology-code/java-diplom/main/pics/simple-test.png";

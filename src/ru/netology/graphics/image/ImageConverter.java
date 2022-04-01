@@ -37,13 +37,12 @@ public class ImageConverter implements TextGraphicsConverter  {
             }
         }
         // масштабирование при заданной допустимой ширине и/или высоте
-        int newWidth = 0;
-        int newHeight = 0;
+        int newWidth;
+        int newHeight;
         if (this.maxWidth > 0 && this.maxHeight > 0) { // если заданы максимальные ширина и высота
             double widthRatio = imgWidth * 1.0 / maxWidth;
             double heightRatio = imgHeight * 1.0 / maxWidth;
-            double ratio = 0.0;
-            ratio = (widthRatio > heightRatio) ?  widthRatio : heightRatio;
+            double ratio = (widthRatio > heightRatio) ?  widthRatio : heightRatio;
             newWidth = (int) (imgWidth / ratio);
             newHeight = (int) (imgHeight / ratio);
         } else if ((this.maxWidth > 0) && (imgWidth > this.maxWidth)) { // если задана максимальная ширина
@@ -67,17 +66,18 @@ public class ImageConverter implements TextGraphicsConverter  {
         WritableRaster bwRaster = bwImg.getRaster();
 
         int[] colorArr = new int[3];
-        String textImg = "";
+        StringBuilder textImg = new StringBuilder();
         for (int y = 0 ; y < newHeight; y++) {
             for (int x = 0 ; x < newWidth; x++) {
                 int color = bwRaster.getPixel(x, y, colorArr)[0];
                 char c = this.schema.convert(color);
-                textImg = textImg + c + c + c;
+                textImg.append(c);
+                textImg.append(c);
+                textImg.append(c);
             }
-            textImg += "\n";
+            textImg.append("\n");
         }
-
-        return textImg; // Возвращаем собранный текст.
+        return textImg.toString(); // Возвращаем собранный текст.
     }
 
     @Override
